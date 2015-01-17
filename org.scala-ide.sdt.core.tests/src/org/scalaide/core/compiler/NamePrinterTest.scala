@@ -6,9 +6,17 @@ import org.junit.Test
 import org.scalaide.CompilerSupportTests
 import NamePrinterTest.mkScalaCompilationUnit
 import org.scalaide.core.internal.jdt.model.ScalaCompilationUnit
+import junit.extensions.RepeatedTest
+import org.junit.runner.RunWith
+import org.junit.runners.Parameterized
+import java.util.Arrays
 
-object NamePrinterTest extends CompilerSupportTests
+object NamePrinterTest extends CompilerSupportTests {
+  @Parameterized.Parameters
+  def data = Arrays.asList(Array.ofDim[AnyRef](200, 0): _*)
+}
 
+@RunWith(classOf[Parameterized])
 class NamePrinterTest {
   import NamePrinterTest._
 
