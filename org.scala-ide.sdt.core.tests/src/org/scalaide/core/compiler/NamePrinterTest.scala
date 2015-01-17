@@ -4,11 +4,18 @@ import org.junit.Assert.assertEquals
 import org.junit.Ignore
 import org.junit.Test
 import org.scalaide.CompilerSupportTests
-
 import NamePrinterTest.mkScalaCompilationUnit
+import junit.extensions.RepeatedTest
+import org.junit.runner.RunWith
+import org.junit.runners.Parameterized
+import java.util.Arrays
 
-object NamePrinterTest extends CompilerSupportTests
+object NamePrinterTest extends CompilerSupportTests {
+  @Parameterized.Parameters
+  def data = Arrays.asList(Array.ofDim[AnyRef](100, 0): _*)
+}
 
+@RunWith(classOf[Parameterized])
 class NamePrinterTest {
   import NamePrinterTest._
 
@@ -389,7 +396,7 @@ class NamePrinterTest {
 
   private def testQnameWith(input: String, expected: Option[String]) {
     val source = input.stripMargin
-    val cu = mkScalaCompilationUnit(source)
+    val cu = mkScalaCompilationUnit(source, true)
     val offset = verifyOffset(source.indexOf("/**/") - 1)
     val namePrinter = new NamePrinter(cu)
     val res = namePrinter.qualifiedNameAt(offset)
