@@ -50,6 +50,8 @@ class LocalRename extends RefactoringExecutor {
             name.pos
           case ImportSelectorTree(_, rename) =>
             rename.pos
+          case NamedArgument(nameTree, _) =>
+            nameTree.pos
           case t =>
             t.namePosition
         }
